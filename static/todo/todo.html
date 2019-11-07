@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="vue.js"></script>
+  <script src="vuex.js"></script>
+  <link rel="stylesheet" href="./todoVuex.css">
+</head>
+<body>
+  <div id="app">
+    <todo-app></todo-app>
+  </div>
+<script>
+  // Vue.use(Vuex)
+  Vue.component('todo-app', {
+    template:`
+      <div class='todoContainer'>
+        <h1>todos</h1>
+          <todo-input class='todoInput'></todo-input>
+          <todo-list class='todoList'></todo-list>
+          <todo-footer class='todoFoot'></todo-footer>
+      </div>
+    `,
+    data() {
+      return {
+
+      }
+    }
+  })
+  
+  Vue.component('todo-input', {
+    template:`
+      <div>
+        <input id='toggleAll' class="toggleAll" type="checkbox" @click="toggleSelectAll" :checked="todos.every(it => it.done)">
+        <label for="toggleAll" ></label>
+        <input class="addTodo" placeholder="Add todo" type="text" v-model.trim="todoText" @keyup.enter="addTodo">
+      </div>
+    `,
+    computed: {
+      todos() {
+        return this.$store.state.todos
+      },
+    },
+    methods: {
+      addTodo() {
+        if(this.todoText) {
+          this.$store.commit('addTodo', this.todoText)
+          this.todoText = ''
+        }
+      },
+      toggleSelectAll(e) {
+        this.$store.commit('toggleSelectAll')
+      }
+    },
+    data() {
+      return {
+        todoText:''
+      }
+    }
+
+  })
+  Vue.component('todo-list', {
+    template:`
+      <ul>
+        <todo-item 
+          v-for="(todo,idx) of todos" :todo="todo" :idx="idx"
+          :key="idx"
+        >
+        </todo-item>
+      </ul>
+    `,
+    computed: {
+      todos() {
+        if(this.$store.state.category == 'all') {
+          return this.$store.state.todos
+        }else if(this.$store.state.category =='active'){
+          return this.$store.state.todos.filter(it => it.done == false)
+        }else if(this.$store.state.category =='completed'){
+          return this.$store.state.todos.filter(it => it.done == true)
+        }
+      }
+    },
+    // computed3: Vuex.mapState(['todos']),
+    // computed4: Vuex.mapState({
+    //   todos:state => state.todos,
+    //   todoLength: state => state.todos.length
+    // }),
+    // computed2: {
+    //   todos() {
+    //     return f.call(this, this.$store.state)
+    //   }
+    // },
+
+  })
+
+  // function mapState(obj) {
+  //   let tmp = {}
+  //   for(let key in obj) {
+  //     let val = obj[key]
+  //     tmp[key] = function() {
+  //       console.log(this)
+  //       return val.call(this, this.$store.state)
+  //     }
+  //   }
+  //   return tmp
+  // }
+
+  Vue.component('todo-item', {
+    props:['todo','idx'],
+    template:`
+      <li >
+        <input :id="'toggleTodo'+idx" class="toggleTodo" type="checkbox" :checked="todo.done"  @click="toggleState">
+        <label :for="'toggleTodo'+idx" v-if="todo.done"><img src="./svgfont/_ionicons_svg_md-checkmark-circle-outline.svg"></img></label>
+        <label :for="'toggleTodo'+idx" v-else><img src="./svgfont/_ionicons_svg_md-radio-button-off.svg"></img></label>
+
+        <span class="todoLi" @dblclick="editIndex($event,idx)" :style="todo.done ? 'text-decoration:line-through;':''" v-if="editing != idx">{{todo.content}}</span>
+        <input class="todoEdit" ref="edit" type="text" v-else :value="todo.content" @blur="changeThing($event, todo)"  @keyup.enter="changeThing($event, todo)">
+
+        <button class="todoButton" @click="deleteItem"></button>
+      </li>
+    `,
+    methods: {
+      deleteItem() {
+        this.$store.commit('deleteTodo', this.todo)
+      }, 
+      toggleState() {
+        this.$store.commit('toggleTodoState',this.todo)
+      },
+      changeThing(e,todo) {
+        this.$store.commit('changeTodo', {e,todo})
+      },
+      editIndex(el,idx) {
+        // console.log(this.$refs)
+
+        setTimeout(() => {
+          // document.querySelector('li input[type=text]').focus()
+          this.$refs.edit.focus()
+        })
+
+        this.$store.commit('editIndex', this.idx)
+      }
+      // ...Vuex.mapMutations(['editIndex'])
+    },
+    computed: {
+      ...Vuex.mapGetters(['editing'])
+    }
+  })
+
+  Vue.component('todo-footer', {
+    template:`
+      <div class="footer">
+        <span class="todoCount"> {{leftCount}} item{{leftCount > 1||leftCount==0 ? 's' : ''}} left</span>
+        <span class="selectFoot">
+          <input hidden type="radio" :checked="category == 'all'" @click="all" name='a' id='all'><label for="all">All</label>
+          <input hidden type="radio" :checked="category == 'active'" @click="active" name='a' id='active'><label for='active'>Active</label>
+          <input hidden type="radio" :checked="category == 'completed'" @click="completed" name='a' id='completed'><label for='completed'>Completed</label>
+        </span>
+        <button v-if="hasCompleted" @click="clearCompleted">Clear Completed</button>
+        </div>
+    `,
+
+    methods: {
+      // clearCompleted() {
+      //   this.$store.commit('clearCompleted')
+      // },
+      all() {
+        this.$store.commit('all')
+      },
+      active() {
+        this.$store.commit('active')
+      },
+      completed() {
+        this.$store.commit('completed')
+      },
+      ...Vuex.mapMutations(['clearCompleted'])
+    },
+    // computed: Vuex.mapGetters(['letCount', 'hasCompleted']),
+    computed: {
+      category() {
+        return this.$store.getters.category
+      },
+      ...Vuex.mapGetters(['leftCount', 'hasCompleted']),
+    },
+  })
+
+//   function mapGetters(getterFields) {
+//   let obj = {}
+//   for(let key of getterFields) {
+//     obj[key] = function() {
+//       return this.$store.getters[key]
+//     }
+//   }
+//   return obj
+// }
+
+  ;(function () {
+    var store = new Vuex.Store({
+      state: {
+        editingIndex: -1,
+        category:'all',
+        todos: JSON.parse(localStorage.getItem('todoItems'))||[{
+          done: true,
+          content: 'eat',
+        },{
+          done: false,
+          content: 'drink',
+        },{
+          done: false,
+          content: 'sleep',
+        },{
+          done: true,
+          content: 'breakfast',
+        },],
+      },
+      mutations: {
+        addTodo(state, content) {
+          state.todos.push({
+            content,
+            done:false
+          })
+        },
+        deleteTodo(state, todo) {
+          state.todos = state.todos.filter(it => it !== todo)
+        },
+        toggleTodoState(state, todo) {
+          todo.done = !todo.done
+        },
+        toggleSelectAll(state) {
+          if(state.todos.every(it => it.done)){
+            state.todos.forEach(it => {
+              it.done = false
+            })
+          }else {
+            state.todos.forEach(it => {
+              it.done = true
+            })
+          }
+        },
+        changeTodo(state, val) {
+          if(state.editingIndex == -1) return
+          val.todo.content = val.e.target.value.trim(); 
+          state.editingIndex = -1
+        },
+        clearCompleted(state) {
+          state.todos = state.todos.filter(it => !it.done)
+        },
+        all(state) {
+          state.category = 'all'
+        },
+        active(state) {
+          state.category = 'active'
+        },
+        completed(state) {
+          state.category = 'completed'
+        },
+        editIndex(state, idx) {
+          state.editingIndex = idx
+          
+          // this.$refs.idx.focus()
+        }
+      },
+      getters: {
+        isAllSelected(state, getters) {
+          return state.todos.every(it => it.done)
+        },
+        leftCount(state, getters) {//未完成项
+          return state.todos.filter(it => !it.done).length
+        },
+        hasCompleted(state, getters) {
+          return state.todos.filter(it => it.done).length > 0
+        },
+        category(state) {
+          return state.category
+        },
+        editing(state) {
+          return state.editingIndex
+        }
+      },
+
+    })
+    store.subscribe((mutation, state) => {
+      console.log(state)
+      localStorage.setItem('todoItems', JSON.stringify(state.todos))
+    })
+    // Vue.use()
+    var app = new Vue({
+      el: '#app',
+      store,
+      mounted() {
+        console.log(store)
+      },
+      beforeCreate() {
+        console.log(store)
+      },
+      created() {
+        console.log(store)
+      },
+
+      updated() {
+        console.log(store)
+      },
+    })
+
+  }())
+</script>
+</body>
+</html>
