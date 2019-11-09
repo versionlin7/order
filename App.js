@@ -10,7 +10,7 @@ const app = express()
 //   console.log(socket.request)
 //   console.log(socket.request.headers)
 //   // let path = url.parse(socket.request.headers.referer).path
-//   // socket.join(path)
+//   // socket.join(path) 
 // })
 
 app.use(cors({
@@ -31,8 +31,8 @@ app.use(cookieParser('secret'))
 const userAccountMiddleware = require('./user-account.js')
 const restaurantMiddleware = require('./restaurant')
 
-app.use(express.static(__dirname + "/build"))//处理静态文件请求的中间件
 app.use(express.static(__dirname + "/static"))//处理静态文件请求的中间件
+app.use(express.static(__dirname + "/build"))//处理静态文件请求的中间件
 app.use('/upload', express.static(__dirname + '/upload'))//处理静态文件请求的中间件
 
 app.use(express.urlencoded({extended:true}))//用于解析扩展url编码请求体

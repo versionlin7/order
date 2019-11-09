@@ -1,16 +1,24 @@
-const httpServer = require('./http-server')
+const {httpServer, httpsServer} = require('./http-server')
+
 const app = require('./App')
 const io = require('./io-server')
 
-httpServer.on('request', app)
+httpsServer.on('request', app)
+httpServer.on('request', function (req, res) {
+  res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+  res.end();
+})
 
-io.desk.attach(httpServer)
-io.restaurant.attach(httpServer)
+io.desk.attach(httpsServer)
+io.restaurant.attach(httpsServer)
 
-const port = 9090
 
-httpServer.listen(port, () => {
-  console.log(port)
+
+httpsServer.listen(443, () => {
+  console.log(443)
+})
+httpServer.listen(80, () => {
+  console.log(80)
 })
 
 // var http = require('http')

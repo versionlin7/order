@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="shortcut icon" href="./CSS.ico" type="image/x-icon"　/>
+    <title>css</title>
+    
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+    <style>
+      /* * {
+        background-color: rgba(0, 0, 0, 0.2);
+      } */
+      body {
+        margin: 0;
+        overflow-y: scroll;
+        font: 14px/1.5 Helvetica Neue, Helvetica, Arial, Microsoft Yahei,
+          Hiragino Sans GB, Heiti SC, WenQuanYi Micro Hei, sans-serif;
+      }
+      a {
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        color: #b0b0b0;
+      }
+      a:hover {
+        color: #616161;
+      }
+      ul {
+        list-style-type: none;
+      }
+      .top-nav {
+        background-color: #333;
+        height: 40px;
+        min-width: 1226px;
+      }
+      .top-nav main {
+        width: 1226px;
+        margin: auto;
+        line-height: 40px;
+        color: #b0b0b0;
+        font-size: 12px;
+      }
+      .top-nav main span {
+        margin: 0 0.5em;
+      }
+      .top-nav main a:hover {
+        color: white;
+      }
+      .top-right {
+        float: right;
+      }
+      .top-right .shopping-cart {
+        width: 120px;
+        background-color: #424242;
+        display: inline-block;
+        height: 40px;
+        vertical-align: bottom;
+        text-align: center;
+        position: relative;
+      }
+      .top-right .shopping-cart:hover {
+        background-color: white;
+      }
+      .top-right .shopping-cart:hover a,
+      .top-right .shopping-cart:hover ion-icon {
+        color: #ff7b21;
+      }
+      .top-right .shopping-cart a {
+        color: #b0b0b0;
+      }
+      .top-right .shopping-cart:hover .cart-outer {
+        height: auto;
+        max-height: 535px;
+        border: 1px solid #b0b0b0;
+        border-right: 1px solid #b0b0b0;
+        border-top: 0px;
+      }
+      .top-right .shopping-cart .cart-outer {
+        z-index: 999;
+        position: absolute;
+        overflow: hidden;
+        right: 0;
+        max-height: 0;
+        width: 315px;
+        transition: 0.5s;
+        border-left: 1px solid #b0b0b0;
+        border-right: 1px solid #b0b0b0;
+      }
+      .cart-inner {
+        height: 480px;
+        overflow-y: scroll;
+      }
+      .cart-inner div {
+        background-color: white;
+        height: 100px;
+        font-size: 15px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        color: black;
+        justify-content: space-between;
+        border-bottom: 1px solid #b0b0b0;
+      }
+      .cart-inner div img {
+        width: 100px;
+      }
+      .main-nav-wrapper {
+        width: 100%;
+        position: relative;
+      }
+      .main-nav {
+        width: 1226px;
+        margin: auto;
+        height: 100px;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .main-nav .img-mi {
+        width: 55px;
+        height: 55px;
+        background-image: url("./mihome.png");
+        background-position: right;
+        transition: 0.3s;
+      }
+      .main-nav .img-mi:hover {
+        background-position: left;
+      }
+      .img-search {
+        display: inherit;
+      }
+      .img-search input {
+        outline: #ff7b21;
+        border: 1px solid #e0e0e0;
+        font-size: 20px;
+        width: 245px;
+        padding-left: 10px;
+      }
+      .img-search div {
+        display: flex;
+        border: 1px solid #e0e0e0;
+        border-left: 0px;
+        height: 50px;
+        width: 50px;
+      }
+      .img-search div:hover {
+        border: 1px solid #ff7b21;
+        border-left: 0px;
+        background-color: #ff7b21;
+      }
+      .img-search div:hover ion-icon {
+        color: white;
+      }
+      .img-search div ion-icon {
+        height: 25px;
+        width: 25px;
+        margin: auto;
+      }
+      .main-nav ul {
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-flow: row;
+      }
+      .main-nav .main-menu > ul > li > a {
+        padding: 26px 10px 42px;
+        font-size: 16px;
+        transition: color 0.2s;
+      }
+      .main-nav ul li a:hover {
+        color: #ff7b21;
+      }
+      .cate-list {
+        position: absolute;
+        height: 0;
+        width: 100%;
+        left: 0;
+        top: 100px;
+        overflow: hidden;
+
+        background-color: white;
+      }
+      .main-menu {
+        display: flex;
+      }
+      .main-menu > ul:hover .cate-list {
+        transition: 1s;
+        height: 230px;
+      }
+      .main-menu > ul li:hover .cate-list {
+        z-index: 200;
+      }
+      .cate-list ul {
+        display: flex;
+        flex-flow: row;
+        justify-content: center;
+      }
+      .cate-list > ul li {
+        width: 203px;
+        height: 230px;
+        border-right: 1px solid #e0e0e0;
+        display: flex;
+        flex-flow: column;
+        justify-content: space-around;
+        align-items: stretch;
+      }
+      .cate-list > ul li:last-child {
+        border-right: 0px;
+      }
+      .cate-list > ul li img {
+        padding: 40px;
+      }
+
+      div.slider {
+        width: 100%;
+        height: 800px;
+        position: relative;
+        overflow: hidden;
+      }
+      .slider {
+        user-select: none;
+        position: relative;
+      }
+      .slider > label {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border: 2px solid rgb(179, 179, 179);
+        border-radius: 71px;
+        position: relative;
+        top: 750px;
+        left: 44%;
+        transform: translateX(-50%);
+        cursor: pointer;
+      }
+      .slider input {
+        display: none;
+      }
+      .slider input:checked + label {
+        background-color: white;
+      }
+      .slider input:checked + label + img {
+        opacity: 1;
+      }
+      .slider img {
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        z-index: -1;
+        position: absolute;
+        left: 0;
+        transition: 1.5s;
+      }
+      div.slidre div {
+        display: block;
+      }
+      div.left label {
+        position: absolute;
+        font-size: 50px;
+        top: 400px;
+        width: 42px;
+        height: 76px;
+      }
+      div.right label {
+        position: absolute;
+        font-size: 50px;
+        top: 400px;
+        right: 0;
+        width: 42px;
+        height: 76px;
+      }
+
+      .slider label:hover {
+        background-color: rgba(0, 0, 0, 0.3);
+      }
+      .slider .left label::before {
+        position: absolute;
+        content: "";
+        line-height: 69px;
+        height: 20px;
+        width: 20px;
+        transform: rotate(-45deg);
+        border-left: 2px solid #fff;
+        border-top: 2px solid #fff;
+        margin-left: 14px;
+        margin-top: 24px;
+      }
+      .slider .right label::before {
+        position: absolute;
+        content: "";
+        line-height: 69px;
+        height: 20px;
+        width: 20px;
+        transform: rotate(135deg);
+        border-left: 2px solid #fff;
+        border-top: 2px solid #fff;
+        right: 14px;
+        margin-top: 25px;
+      }
+      div.slider div.left label,
+      div.slider div.right label {
+        display: none;
+        color: white;
+      }
+
+      #sp1:checked ~ div.left label:nth-child(1),
+      #sp1:checked ~ div.right label:nth-child(1) {
+        display: block;
+      }
+
+      #sp2:checked ~ div.left label:nth-child(2),
+      #sp2:checked ~ div.right label:nth-child(2) {
+        display: block;
+      }
+
+      #sp3:checked ~ div.left label:nth-child(3),
+      #sp3:checked ~ div.right label:nth-child(3) {
+        display: block;
+      }
+
+      #sp4:checked ~ div.left label:nth-child(4),
+      #sp4:checked ~ div.right label:nth-child(4) {
+        display: block;
+      }
+
+      #sp5:checked ~ div.left label:nth-child(5),
+      #sp5:checked ~ div.right label:nth-child(5) {
+        display: block;
+      }
+      .home-promo {
+        width: 1226px;
+        margin: auto;
+      }
+      .home-promo > ul {
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+      .home-promo > ul > li:hover img {
+        box-shadow: 0px 3px 7px 0px;
+        transition: 0.3s linear;
+      }
+      .home-sec {
+        width: 1226px;
+        margin: auto;
+      }
+      .home-sec .sec-bd ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      .home-sec h2 {
+        margin: 20px 38px 0px;
+        text-transform: uppercase;
+        font-weight: 300;
+        color: #616161;
+      }
+      .sec-bd ul {
+        width: 100%;
+        height: 580px;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+      }
+      .sec-bd ul ul {
+        width: 612px;
+        display: flex;
+        margin: 0;
+        padding: 0;
+        flex-flow: row wrap;
+        justify-content: space-between;
+      }
+      .sec-bd ul li {
+        float: left;
+      }
+
+      .sec-bd ul li:hover img {
+        box-shadow: 0px 3px 7px 0px;
+        transition: 0.3s linear;
+      }
+      .sec-bd ul li img {
+        width: 100%;
+        height: 100%;
+      }
+      .footer {
+        margin-top: 100px;
+      }
+      .footer .row {
+        width: 1226px;
+        margin-right: auto;
+        margin-left: auto;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+      }
+      .footer .row1,
+      .row2 {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 613px;
+      }
+      .row2 {
+        justify-content: space-around;
+      }
+      .row1 h3,
+      .row2 h3 {
+        margin: 0;
+        font-size: 18px;
+        color: #424242;
+        line-height: 1;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+      .row1 p,
+      .row2 p {
+        font-size: 12px;
+        margin: 0;
+        color: #424242;
+      }
+      .row1 .email {
+        position: relative;
+
+        width: 209px;
+
+        line-height: 34px;
+        font-size: 14px;
+
+        padding: 2px 40px 2px 17px;
+
+        border: 1px solid #e0e0e0;
+        outline: 0;
+      }
+      .row1 button {
+        position: absolute;
+        right: 0;
+        top: 4px;
+        height: 100%;
+        padding: 0 10px;
+        background-color: transparent;
+        border: none;
+        outline: 0;
+        cursor: pointer;
+      }
+      .social-media {
+        margin-top: 5px;
+        font-size: 21px;
+      }
+      .social-media a {
+        margin: 0 13px;
+      }
+      .footer-nav {
+        padding: 40px 0;
+      }
+      .footer-bottom {
+        border-top: 1px solid #424242;
+        line-height: 70px;
+        width: 1226px;
+        margin-right: auto;
+        margin-left: auto;
+      }
+      .footer-down {
+        background-color: #212121;
+        color: #b0b0b0;
+      }
+      .footer-nav dt {
+        font-size: 14px;
+        text-transform: uppercase;
+        line-height: 40px;
+        font-weight: 600;
+      }
+      .footer-nav dd {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="top-nav">
+        <main>
+          <a>XIAOMI SHOP</a>
+          <span>|</span>
+          <a> MIUI </a>
+          <span>|</span>
+          <a> IoT </a>
+          <span>|</span>
+          <a> Cloud Service </a>
+          <span>|</span>
+          <a> Financial </a>
+          <span>|</span>
+          <a> Open platform </a>
+          <span>|</span>
+          <a> Enterprise </a>
+          <span>|</span>
+          <a> Agreement Rules </a>
+          <span>|</span>
+          <a>Select Location</a>
+
+          <div class="top-right">
+            <a>Login</a>
+            <span>|</span>
+            <a>Register</a>
+            <span>|</span>
+            <a>Notification</a>
+            <div class="shopping-cart">
+              <ion-icon
+                name="cart"
+                style="vertical-align: middle;height: 20px;width: 20px;"
+              ></ion-icon>
+              <a>Cart (0)</a>
+              <div class="cart-outer">
+                <div class="cart-inner">
+                  <div>
+                    <img
+                      src="./d295c4fb500d163a7045dc715b47f808.webp"
+                      alt=""
+                    /><span>手机 X 1</span>
+                  </div>
+                  <div>
+                    <img
+                      src="./d295c4fb500d163a7045dc715b47f808.webp"
+                      alt=""
+                    /><span>手机 X 1</span>
+                  </div>
+                  <div>
+                    <img
+                      src="./d295c4fb500d163a7045dc715b47f808.webp"
+                      alt=""
+                    /><span>手机 X 1</span>
+                  </div>
+                  <div>
+                    <img
+                      src="./d295c4fb500d163a7045dc715b47f808.webp"
+                      alt=""
+                    /><span>手机 X 1</span>
+                  </div>
+                  <div>
+                    <img
+                      src="./d295c4fb500d163a7045dc715b47f808.webp"
+                      alt=""
+                    /><span>手机 X 1</span>
+                  </div>
+                  <div>
+                    <img
+                      src="./d295c4fb500d163a7045dc715b47f808.webp"
+                      alt=""
+                    /><span>手机 X 1</span>
+                  </div>
+                  <div>
+                    <img
+                      src="./d295c4fb500d163a7045dc715b47f808.webp"
+                      alt=""
+                    /><span>手机 X 1</span>
+                  </div>
+                </div>
+                <div
+                  style="background-color: #ff7b21;color: white;cursor: pointer;"
+                >
+                  结算
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </header>
+      <div class="main-nav-wrapper">
+        <nav class="main-nav">
+          <div class="img-mi"></div>
+          <div class="main-menu">
+            <ul>
+              <li>
+                <a>Phone</a>
+                <div class="cate-list">
+                  <ul>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/f515ab05232ed14ccd78ec67e024495a.png?thumb=1&w=160&h=110"
+                        alt=""
+                      />
+                      <a href=""
+                        >Xperia one<br />
+                        6,299元</a
+                      >
+                    </li>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/f515ab05232ed14ccd78ec67e024495a.png?thumb=1&w=160&h=110"
+                        alt=""
+                      />
+                      <a href=""
+                        >Xperia one<br />
+                        6,299元</a
+                      >
+                    </li>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/f515ab05232ed14ccd78ec67e024495a.png?thumb=1&w=160&h=110"
+                        alt=""
+                      />
+                      <a href=""
+                        >Xperia one<br />
+                        6,299元</a
+                      >
+                    </li>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/f515ab05232ed14ccd78ec67e024495a.png?thumb=1&w=160&h=110"
+                        alt=""
+                      />
+                      <a href=""
+                        >Xperia one<br />
+                        6,299元</a
+                      >
+                    </li>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/f515ab05232ed14ccd78ec67e024495a.png?thumb=1&w=160&h=110"
+                        alt=""
+                      />
+                      <a href=""
+                        >Xperia one<br />
+                        6,299元</a
+                      >
+                    </li>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/f515ab05232ed14ccd78ec67e024495a.png?thumb=1&w=160&h=110"
+                        alt=""
+                      />
+                      <a href=""
+                        >Xperia one<br />
+                        6,299元</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li>
+                <a>Redmi</a>
+                <div class="cate-list">
+                  <ul>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/a9734e0314fec470ff6912a8a92da5e6.png?thumb=1&w=160&h=110&f=webp&q=90"
+                        alt=""
+                      />
+                      <a href="">Redmi 8A<<br />699元起</a>
+                    </li>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/a9734e0314fec470ff6912a8a92da5e6.png?thumb=1&w=160&h=110&f=webp&q=90"
+                        alt=""
+                      />
+                      <a href="">Redmi 8A<<br />699元起</a>
+                    </li>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/a9734e0314fec470ff6912a8a92da5e6.png?thumb=1&w=160&h=110&f=webp&q=90"
+                        alt=""
+                      />
+                      <a href="">Redmi 8A<<br />699元起</a>
+                    </li>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/a9734e0314fec470ff6912a8a92da5e6.png?thumb=1&w=160&h=110&f=webp&q=90"
+                        alt=""
+                      />
+                      <a href="">Redmi 8A<<br />699元起</a>
+                    </li>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/a9734e0314fec470ff6912a8a92da5e6.png?thumb=1&w=160&h=110&f=webp&q=90"
+                        alt=""
+                      />
+                      <a href="">Redmi 8A<<br />699元起</a>
+                    </li>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/a9734e0314fec470ff6912a8a92da5e6.png?thumb=1&w=160&h=110&f=webp&q=90"
+                        alt=""
+                      />
+                      <a href="">Redmi 8A<<br />699元起</a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li>
+                <a>Stream TV</a>
+                <div class="cate-list">
+                  <ul>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/6917267948c54c647d2009a98637aac6.jpg?thumb=1&w=160&h=110&f=webp&q=90"
+                        alt="0"
+                      />
+                      <a href="">Redmi 红米电视 70英寸 R70A<br />3799元</a>
+                    </li>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/6917267948c54c647d2009a98637aac6.jpg?thumb=1&w=160&h=110&f=webp&q=90"
+                        alt="0"
+                      />
+                      <a href="">Redmi 红米电视 70英寸 R70A<br />3799元</a>
+                    </li>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/6917267948c54c647d2009a98637aac6.jpg?thumb=1&w=160&h=110&f=webp&q=90"
+                        alt="0"
+                      />
+                      <a href="">Redmi 红米电视 70英寸 R70A<br />3799元</a>
+                    </li>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/6917267948c54c647d2009a98637aac6.jpg?thumb=1&w=160&h=110&f=webp&q=90"
+                        alt="0"
+                      />
+                      <a href="">Redmi 红米电视 70英寸 R70A<br />3799元</a>
+                    </li>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/6917267948c54c647d2009a98637aac6.jpg?thumb=1&w=160&h=110&f=webp&q=90"
+                        alt="0"
+                      />
+                      <a href="">Redmi 红米电视 70英寸 R70A<br />3799元</a>
+                    </li>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/6917267948c54c647d2009a98637aac6.jpg?thumb=1&w=160&h=110&f=webp&q=90"
+                        alt="0"
+                      />
+                      <a href="">Redmi 红米电视 70英寸 R70A<br />3799元</a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li>
+                <a>Laptop</a>
+                <div class="cate-list">
+                  <ul>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/d712f71b3c4a3b562601c2b956a660ad.png?thumb=1&w=128&h=88"
+                        alt="0"
+                      />
+                      <a href="">小米笔记本Pro 15.6"<br />4999元起</a>
+                    </li>
+
+                    <li>
+                      <img
+                        src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/d712f71b3c4a3b562601c2b956a660ad.png?thumb=1&w=128&h=88"
+                        alt="0"
+                      />
+                      <a href="">小米笔记本Pro 15.6"<br />4999元起</a>
+                    </li>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/d712f71b3c4a3b562601c2b956a660ad.png?thumb=1&w=128&h=88"
+                        alt="0"
+                      />
+                      <a href="">小米笔记本Pro 15.6"<br />4999元起</a>
+                    </li>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/d712f71b3c4a3b562601c2b956a660ad.png?thumb=1&w=128&h=88"
+                        alt="0"
+                      />
+                      <a href="">小米笔记本Pro 15.6"<br />4999元起</a>
+                    </li>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/d712f71b3c4a3b562601c2b956a660ad.png?thumb=1&w=128&h=88"
+                        alt="0"
+                      />
+                      <a href="">小米笔记本Pro 15.6"<br />4999元起</a>
+                    </li>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/d712f71b3c4a3b562601c2b956a660ad.png?thumb=1&w=128&h=88"
+                        alt="0"
+                      />
+                      <a href="">小米笔记本Pro 15.6"<br />4999元起</a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li>
+                <a>Home appliance</a>
+                <div class="cate-list">
+                  <ul>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/03dc85cd792904ddc8027b2d781beed8.png?thumb=1&w=128&h=88&f=webp&q=90"
+                        alt="0"
+                      />
+                      <a href="">米家互联网空调C1（一级能效）<br />2249元</a>
+                    </li>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/03dc85cd792904ddc8027b2d781beed8.png?thumb=1&w=128&h=88&f=webp&q=90"
+                        alt="0"
+                      />
+                      <a href="">米家互联网空调C1（一级能效）<br />2249元</a>
+                    </li>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/03dc85cd792904ddc8027b2d781beed8.png?thumb=1&w=128&h=88&f=webp&q=90"
+                        alt="0"
+                      />
+                      <a href="">米家互联网空调C1（一级能效）<br />2249元</a>
+                    </li>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/03dc85cd792904ddc8027b2d781beed8.png?thumb=1&w=128&h=88&f=webp&q=90"
+                        alt="0"
+                      />
+                      <a href="">米家互联网空调C1（一级能效）<br />2249元</a>
+                    </li>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/03dc85cd792904ddc8027b2d781beed8.png?thumb=1&w=128&h=88&f=webp&q=90"
+                        alt="0"
+                      />
+                      <a href="">米家互联网空调C1（一级能效）<br />2249元</a>
+                    </li>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/03dc85cd792904ddc8027b2d781beed8.png?thumb=1&w=128&h=88&f=webp&q=90"
+                        alt="0"
+                      />
+                      <a href="">米家互联网空调C1（一级能效）<br />2249元</a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li>
+                <a>Router</a>
+                <div class="cate-list">
+                  <ul>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/5dd23c09b7eb6471968537fdce629194.png?thumb=1&w=128&h=88&f=webp&q=90"
+                        alt="0"
+                      />
+                      <a href="">小米路由器AC2100<br />229元</a>
+                    </li>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/5dd23c09b7eb6471968537fdce629194.png?thumb=1&w=128&h=88&f=webp&q=90"
+                        alt="0"
+                      />
+                      <a href="">小米路由器AC2100<br />229元</a>
+                    </li>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/5dd23c09b7eb6471968537fdce629194.png?thumb=1&w=128&h=88&f=webp&q=90"
+                        alt="0"
+                      />
+                      <a href="">小米路由器AC2100<br />229元</a>
+                    </li>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/5dd23c09b7eb6471968537fdce629194.png?thumb=1&w=128&h=88&f=webp&q=90"
+                        alt="0"
+                      />
+                      <a href="">小米路由器AC2100<br />229元</a>
+                    </li>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/5dd23c09b7eb6471968537fdce629194.png?thumb=1&w=128&h=88&f=webp&q=90"
+                        alt="0"
+                      />
+                      <a href="">小米路由器AC2100<br />229元</a>
+                    </li>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/5dd23c09b7eb6471968537fdce629194.png?thumb=1&w=128&h=88&f=webp&q=90"
+                        alt="0"
+                      />
+                      <a href="">小米路由器AC2100<br />229元</a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li>
+                <a>Smart Devices</a>
+                <div class="cate-list">
+                  <ul>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/2a500be4264c692899b25d86c16403f7.jpg?thumb=1&w=128&h=88"
+                        alt="0"
+                      />
+                      <a href="">小米米家智能摄像机云台版<br />199元</a>
+                    </li>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/2a500be4264c692899b25d86c16403f7.jpg?thumb=1&w=128&h=88"
+                        alt="0"
+                      />
+                      <a href="">小米米家智能摄像机云台版<br />199元</a>
+                    </li>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/2a500be4264c692899b25d86c16403f7.jpg?thumb=1&w=128&h=88"
+                        alt="0"
+                      />
+                      <a href="">小米米家智能摄像机云台版<br />199元</a>
+                    </li>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/2a500be4264c692899b25d86c16403f7.jpg?thumb=1&w=128&h=88"
+                        alt="0"
+                      />
+                      <a href="">小米米家智能摄像机云台版<br />199元</a>
+                    </li>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/2a500be4264c692899b25d86c16403f7.jpg?thumb=1&w=128&h=88"
+                        alt="0"
+                      />
+                      <a href="">小米米家智能摄像机云台版<br />199元</a>
+                    </li>
+                    <li>
+                      <img
+                        src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/2a500be4264c692899b25d86c16403f7.jpg?thumb=1&w=128&h=88"
+                        alt="0"
+                      />
+                      <a href="">小米米家智能摄像机云台版<br />199元</a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+            <ul>
+              <li><a>Support</a></li>
+              <li><a>Social</a></li>
+            </ul>
+          </div>
+          <div class="img-search">
+            <input type="text" />
+            <div>
+              <ion-icon name="search"></ion-icon>
+            </div>
+          </div>
+        </nav>
+      </div>
+
+      <div class="slider">
+        <input checked type="radio" name="sliderpicture" id="sp1" />
+        <label for="sp1"></label>
+        <img src="./2.jpg" alt="" />
+        <input type="radio" name="sliderpicture" id="sp2" />
+        <label for="sp2"></label>
+        <img src="./5.jpg" alt="" />
+        <input type="radio" name="sliderpicture" id="sp3" />
+        <label for="sp3"></label>
+        <img src="./3.jpg" alt="" />
+        <input type="radio" name="sliderpicture" id="sp4" />
+        <label for="sp4"></label>
+        <img src="./4.jpg" alt="" />
+        <input type="radio" name="sliderpicture" id="sp5" />
+        <label for="sp5"></label>
+        <img src="./1.jpg" alt="" />
+        <div class="left">
+          <label for="sp5"></label>
+          <label for="sp1"></label>
+          <label for="sp2"></label>
+          <label for="sp3"></label>
+          <label for="sp4"></label>
+        </div>
+        <div class="right">
+          <label for="sp2"></label>
+          <label for="sp3"></label>
+          <label for="sp4"></label>
+          <label for="sp5"></label>
+          <label for="sp1"></label>
+        </div>
+      </div>
+      <div class="home-promo">
+        <ul class="home-promo-list full-img">
+          <li>
+            <img src="./home-promo1.jpg" alt="" />
+          </li>
+
+          <li>
+            <img src="./home-promo2.jpg" alt="" />
+          </li>
+
+          <li>
+            <img src="./home-promo3.jpg" alt="" />
+          </li>
+        </ul>
+      </div>
+      <div class="home-sec">
+        <h2 class="sec-title">Star Products</h2>
+        <div class="sec-bd">
+          <ul class="home-star-list list-4 full-img">
+            <li
+              style="width: 610px; height: 580px;
+            margin-left: -4px;"
+            >
+              <img src="./home1.jpg" alt="" />
+            </li>
+            <ul>
+              <li style="width: 300px; height: 289px;">
+                <img src="./home2.jpg" alt="" />
+              </li>
+              <li style="width: 305px; height: 289px;">
+                <img src="./home3.jpg" alt="" />
+              </li>
+              <li style="width: 612px; height: 287px;">
+                <img src="./home4.png" alt="" />
+              </li>
+            </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="footer">
+        <div class="footer-nav">
+          <div class="row">
+            <div class="row1">
+              <div class="introduction">
+                <h3>Let's stay in touch</h3>
+                <p>Get updates on sales specials and more</p>
+              </div>
+
+              <div style="position: relative;">
+                <input
+                  type="text"
+                  class="email"
+                  placeholder="Enter Email Address"
+                />
+                <button>
+                  <ion-icon name="return-right"></ion-icon>
+                </button>
+              </div>
+            </div>
+            <div class="row2">
+              <div class="introduction">
+                <h3>Follow Mi</h3>
+                <p>We want to hear from you!</p>
+              </div>
+              <div class="social-media">
+                <a href="" target="_blank"
+                  ><ion-icon name="logo-facebook"></ion-icon
+                ></a>
+                <a href="" target="_blank"
+                  ><ion-icon name="logo-youtube"></ion-icon
+                ></a>
+                <a href="https://www.instagram.com/" target="_blank"
+                  ><ion-icon name="logo-instagram"></ion-icon
+                ></a>
+                <a href="https://www.twitter.com/" target="_blank"
+                  ><ion-icon name="logo-twitter"></ion-icon
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer-down">
+          <div class="footer-nav">
+            <div class="row">
+              <dl class="span3">
+                <dt>SUPPORT</dt>
+                <dd>
+                  <a href="https://www.mi.com/us/supports/" target="_self"
+                    >Warranty</a
+                  >
+                </dd>
+                <dd>
+                  <a
+                    href="https://www.mi.com/us/support/contact/"
+                    target="_self"
+                    >Contact Us</a
+                  >
+                </dd>
+                <dd>
+                  <a
+                    href="https://www.mi.com/us/service/userguide/"
+                    target="_self"
+                    >User Guide</a
+                  >
+                </dd>
+              </dl>
+              <dl class="span3">
+                <dt>ABOUT US</dt>
+                <dd>
+                  <a href="https://www.mi.com/us/about/" target="_self"
+                    >Xiaomi</a
+                  >
+                </dd>
+                <dd>
+                  <a href="https://www.mi.com/us/about/mediakit/" target="_self"
+                    >Press &amp; Media</a
+                  >
+                </dd>
+                <dd>
+                  <a
+                    href="https://www.mi.com/us/about/agreement/"
+                    target="_self"
+                    >User Agreement</a
+                  >
+                </dd>
+                <dd>
+                  <a href="https://privacy.mi.com/all/en_US" target="_blank"
+                    >Privacy Policy</a
+                  >
+                </dd>
+                <dd>
+                  <a href="https://integrity.mi.com/global" target="_blank"
+                    >Integrity &amp; Compliance</a
+                  >
+                </dd>
+              </dl>
+
+              <dl class="span3">
+                <dt>
+                  FOLLOW MI
+                </dt>
+                <dd>
+                  <a href="https://www.facebook.com" target="_blank"
+                    ><ion-icon name="logo-facebook"></ion-icon>&nbsp;Facebook</a
+                  >
+                </dd>
+                <dd>
+                  <a href="https://www.youtube.com" target="_blank"
+                    ><ion-icon name="logo-youtube"></ion-icon>&nbsp;Youtube</a
+                  >
+                </dd>
+                <dd>
+                  <a href="https://www.instagram.com/" target="_blank"
+                    ><ion-icon name="logo-instagram"></ion-icon
+                    >&nbsp;Instagram</a
+                  >
+                </dd>
+                <dd>
+                  <a href="https://www.twitter.com" target="_blank"
+                    ><ion-icon name="logo-twitter"></ion-icon>&nbsp;Twitter</a
+                  >
+                </dd>
+              </dl>
+              <dl class="span3"></dl>
+              <dl class="span3"></dl>
+              <div class="span3 span-service">
+                <div class="customer-service">
+                  <div class="hotline">
+                    1-833-XIAOMI8<br />
+                    <span class="subline">(1-833-942-6648)</span>
+                  </div>
+                  <div class="customer-service-time" style="width:200px;">
+                    SERVICE HOURS 08:00-18:00 CST
+                  </div>
+                </div>
+                <a href="" class="chat-btn J_chatBtn_en">CHAT SUPPORT</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="footer-bottom">
+            <div class="copyright">
+              Copyright © 2010 - 2019
+              <a href="https://www.mi.com/global/">Xiaomi</a>. All Rights
+              Reserved
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
